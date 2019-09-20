@@ -14,6 +14,7 @@ const submitBtn = document.getElementById('submitBtn');
 
 const digits = document.getElementsByClassName('digit');
 const clear = document.getElementsByClassName('clear');
+const clearall = document.getElementsByClassName('clearall');
 const cardHeader = document.getElementsByClassName('card-header');
 
 
@@ -51,6 +52,10 @@ for(var i=0; i<digits.length; i++){
 
 clear[0].addEventListener('click', function(e){
     textInput.value = textInput.value.substring(0, textInput.value.length -1 );
+});
+
+clearall[0].addEventListener('click', function(e){
+    textInput.value = ''
 });
 
 
@@ -131,9 +136,8 @@ function forDivide(){
     while(mod != 0){
         snum  = randomIntFromInterval(1, fnum)
         mod = fnum % snum;
-    }
-    
-    console.log(fnum+'==='+snum);
+    }    
+   
     num1.innerText = fnum;
     num2.innerText = snum;
 }
@@ -156,12 +160,12 @@ function randomIntFromInterval(min, max) { // min and max included
 function submitAnswer(){
     let ans = parseInt(textInput.value.trim());
     if(checkAnswer(parseInt(num1.innerText.trim()), parseInt(num2.innerText.trim()), ans, operation)){
-        console.log('correct');
+        //console.log('correct');
         cardHeader[0].classList.remove('bg-danger');
         cardHeader[0].classList.add('bg-success');
         cardHeader[0].innerHTML = 'Correct';
     }else{
-        console.log('wrong : ');
+        //console.log('wrong : ');
         cardHeader[0].classList.remove('bg-success');
         cardHeader[0].classList.add('bg-danger');
         cardHeader[0].innerHTML = 'Wrong : ' + solutionStr;
@@ -210,7 +214,7 @@ function checkAnswer(n1, n2, ans, operand){ // add || subtract || divide || mult
     else { // multiply
         if(n1 * n2 == ans){
            return true;
-        }  console.log(n1 * n2);
+        }  
         solutionStr = n1 + ' * ' + n2 + ' = ' + (n1*n2);
         return false;
     }
